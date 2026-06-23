@@ -1,82 +1,36 @@
+# epub-reader — Read, search, and convert EPUB files from the CLI
+
+> Open any EPUB to inspect metadata, browse the table of contents, read chapters by index or range, search text, and export to other formats. No external reader needed.
+
+[![OpenClaw Skill](https://img.shields.io/badge/OpenClaw-Skill-blueviolet)](https://github.com/NachaFromMars)
+
+## Overview
+epub-reader is a Python CLI for inspecting and extracting content from EPUB files. Built on ebooklib, beautifulsoup4, and lxml, with calibre as fallback. It covers the full read-and-extract workflow: metadata inspection, chapter listing with word counts, targeted reading by chapter or range, full-text search, and format conversion.
+
+## Features
+- **`info`** — book metadata (title, author, language, word count)
+- **`toc`** — table of contents
+- **`list`** — all chapters with individual word counts
+- **`read`** — full book, single chapter (`--chapter 5`), or range (`--range 5-10`)
+- **`search "term"`** — full-text search across all chapters
+- **`convert`** — export to Markdown, plain text, or HTML
+
+## Usage / Quick Start
+```bash
+python3 scripts/epub-reader.py info book.epub
+python3 scripts/epub-reader.py toc book.epub
+python3 scripts/epub-reader.py list book.epub
+python3 scripts/epub-reader.py read book.epub --chapter 3
+python3 scripts/epub-reader.py search "keyword" book.epub
+python3 scripts/epub-reader.py convert book.epub --format markdown
+```
+
+## Trigger Keywords (OpenClaw)
+epub, ebook, read book, open book, book file, convert epub, extract text from ebook
+
+## Related Skills
+- [epub-forge](https://github.com/NachaFromMars/epub-forge) — build EPUBs
+- [epub-builder](https://github.com/NachaFromMars/epub-builder) — build EPUBs from raw chapters
+
 ---
-name: epub-reader
-description: "Read, search, and convert EPUB ebook files. Extract text, metadata, table of contents, and chapters from .epub files. Use when user needs to open/read/view EPUB files, extract text from ebooks, search within ebooks, convert EPUB to markdown/text/HTML, or get book info (title, author, word count). Triggers on: epub, ebook, read book, open book, book file, convert epub."
----
-
-# EPUB Reader
-
-Read and process EPUB files directly. No external reader needed.
-
-## Script
-
-`scripts/epub-reader.py` — Python CLI for all EPUB operations.
-
-### Dependencies
-Already installed: `ebooklib`, `beautifulsoup4`, `lxml`
-Fallback available: `calibre` (`ebook-convert`)
-
-## Commands
-
-### Get book info
-```bash
-python3 scripts/epub-reader.py info <file.epub>
-python3 scripts/epub-reader.py info <file.epub> --json
-```
-
-### Table of contents
-```bash
-python3 scripts/epub-reader.py toc <file.epub>
-```
-
-### List all chapters (with word counts)
-```bash
-python3 scripts/epub-reader.py list <file.epub>
-```
-
-### Read content
-```bash
-# All chapters
-python3 scripts/epub-reader.py read <file.epub>
-
-# Specific chapter
-python3 scripts/epub-reader.py read <file.epub> --chapter 5
-
-# Chapter range
-python3 scripts/epub-reader.py read <file.epub> --range 5-10
-
-# Output format: txt (default), md, html
-python3 scripts/epub-reader.py read <file.epub> --chapter 5 --format md
-```
-
-### Search text
-```bash
-python3 scripts/epub-reader.py search <file.epub> "search query" --limit 20
-```
-
-### Convert entire book
-```bash
-# To markdown (default)
-python3 scripts/epub-reader.py convert <file.epub>
-
-# To text or HTML
-python3 scripts/epub-reader.py convert <file.epub> --format txt
-python3 scripts/epub-reader.py convert <file.epub> --format html
-
-# Custom output path
-python3 scripts/epub-reader.py convert <file.epub> --output /path/to/output.md
-```
-
-## Calibre Fallback
-
-If ebooklib fails, use calibre:
-```bash
-ebook-convert input.epub output.txt
-ebook-convert input.epub output.md --markdown-extensions
-```
-
-## Tips
-- Chapter numbers in `list` output match `--chapter N` in `read`
-- Use `--format md` for best readability with headings preserved
-- `search` shows context lines around each match
-- `convert` creates a single file with metadata header + all chapters
-- Suppress XML warnings with `2>/dev/null` if noisy
+Part of the [NachaFromMars](https://github.com/NachaFromMars) OpenClaw skill ecosystem.
